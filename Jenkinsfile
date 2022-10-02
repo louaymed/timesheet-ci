@@ -26,13 +26,12 @@ pipeline {
 	}
         
      stage('SonarQube - SAST') {
-         steps {
-          sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=louay"
-      }
+       steps {
+        sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=louay"
         timeout(time: 2, unit: 'MINUTES') {
           script {
             waitForQualityGate abortPipeline: true
-          
+	  } 
        }
       }
      }
