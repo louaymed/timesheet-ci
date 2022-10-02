@@ -18,6 +18,13 @@ pipeline {
                sh "mvn test"
       }
     }
+        stage('Git') {
+           steps {
+		echo "Getting project from Git";
+                git "https://github.com/louaymed/timesheet-ci.git";
+            }
+	}
+        
      stage('SonarQube - SAST') {
          steps {
        withSonarQubeEnv('SonarQube') {
