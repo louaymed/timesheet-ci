@@ -30,5 +30,14 @@ pipeline {
         sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=louay"
       }
      }
+  stage('Docker Build and Push') {
+       steps {
+         withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
+           sh 'printenv'
+           sh 'sudo docker build -t louaymed/timesheet-ci:""$GIT_COMMIT"" .'
+           sh 'docker push louaymed/timesheet-ci:""$GIT_COMMIT""'
+         }
+       }
+    }
     }
 }
