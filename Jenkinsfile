@@ -18,5 +18,19 @@ pipeline {
                sh "mvn test"
       }
     }
+     stage('SonarQube - SAST') {
+         steps {
+       withSonarQubeEnv('SonarQube') {
+          sh "mvn sonar:sonar \
+		              -Dsonar.login=admin \
+	 	              -Dsonar.password=louay"
+      }
+        timeout(time: 2, unit: 'MINUTES') {
+          script {
+            waitForQualityGate abortPipeline: true
+          }
+       }
+      }
+     }
     }
 }
