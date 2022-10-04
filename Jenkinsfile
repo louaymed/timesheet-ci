@@ -34,8 +34,8 @@ pipeline {
        steps {
          withDockerRegistry([credentialsId: "docker-hub", url: ""]) {
            sh 'printenv'
-           sh 'docker build -t louaymed/timesheet-ci .'
-           sh 'docker push louaymed/timesheet-ci'
+           sh 'docker build -t louay123/louaymed:test1 .'
+           sh 'docker push louay123/louaymed:test1'
          }
        }
     }
